@@ -2,8 +2,7 @@
 
 Prosty plugin napisany w 30 minut.
 <br>
-<br>
-
-#Kontakt<br>
-email: makowatyc123@gmail.com<br>
-discord: czarru#2733
+<hr>
+# Kontakt
+Email: makowatyc123@gmail.com<br>
+Discord: czarru#2733
