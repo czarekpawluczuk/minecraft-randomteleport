@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class PlayerInteractListener implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onInteract(PlayerInteractEvent e){
         final Player p = e.getPlayer();
         final Action a = e.getAction();
