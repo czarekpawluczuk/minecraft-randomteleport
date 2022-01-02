@@ -1,7 +1,8 @@
 # Plugin na losowe teleportacje
 
-Prosty plugin napisany w 30 minut.
+Prosty plugin napisany w 30 minut. 
 <br>
+<hr>
 <hr>
 # Kontakt
 Email: makowatyc123@gmail.com<br>
