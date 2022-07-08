@@ -1,9 +1,5 @@
-# Plugin na losowe teleportacje
-
-Prosty plugin napisany w 30 minut. 
+#Plugin na losowe teleportowanie się graczy pojedyńczo bądź 1vs1
+<hr>
+Plugin powinien działać na wersjach 1.8-1.19, jeśli masz jakieś błędy/sugestie dotyczące pluginu/kodu skontaktuj się na discord.<br>
 <br>
-<hr>
-<hr>
-# Kontakt
-Email: makowatyc123@gmail.com<br>
-Discord: czarru#2733
+<strong>Discord:</strong> czarru#2700<br>
