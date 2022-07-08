@@ -5,8 +5,8 @@ config:
     plate: IRON_PLATE
     button: STONE_BUTTON
   coordinates:
-    minX: 100
-    minZ: 100
+    minX: -100
+    minZ: -100
     maxX: 100
     maxZ: 100
   messages:

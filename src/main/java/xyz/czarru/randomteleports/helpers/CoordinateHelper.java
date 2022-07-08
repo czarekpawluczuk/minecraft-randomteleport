@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import xyz.czarru.randomteleports.RandomTeleportPlugin;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,19 +15,21 @@ import java.util.Random;
 public class CoordinateHelper {
 
     private Random random = new Random();
-    private ConfigurationSection config = Bukkit.spigot().getConfig();
+    private RandomTeleportPlugin plugin;
 
-    private int Xmax = config.getInt("config.coordinates.maxX");
-    private int Xmin = config.getInt("config.coordinates.minX");
-    private int Zmax = config.getInt("config.coordinates.maxZ");
-    private int Zmin = config.getInt("config.coordinates.minZ");
-
+    public CoordinateHelper(RandomTeleportPlugin plugin){
+        this.plugin = plugin;
+    }
 
     public int getRandomX() {
+        int Xmax = plugin.getConfig().getInt("config.coordinates.maxX");
+        int Xmin = plugin.getConfig().getInt("config.coordinates.minX");
         return random.nextInt(Xmax - Xmin) + Xmin;
     }
 
     public int getRandomZ() {
+        int Zmax = plugin.getConfig().getInt("config.coordinates.maxZ");
+        int Zmin = plugin.getConfig().getInt("config.coordinates.minZ");
         return random.nextInt(Zmax - Zmin) + Zmin;
     }
 
@@ -50,7 +53,7 @@ public class CoordinateHelper {
         final double range = 3.0;
         for (final Entity entity : loc.getWorld().getNearbyEntities(loc, range, range, range)) {
             if (entity instanceof Player && !entity.equals(p)) {
-                if(p.getLocation().getBlock().getType().equals(Material.getMaterial(config.getString("config.blocks.plate")))) {
+                if(p.getLocation().getBlock().getType().equals(Material.getMaterial(plugin.getConfig().getString("config.blocks.plate")))) {
                     nearbyPlayersList.add((Player)entity);
                 }
             }

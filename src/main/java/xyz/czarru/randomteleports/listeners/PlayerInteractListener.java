@@ -12,42 +12,59 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.material.Button;
+import xyz.czarru.randomteleports.RandomTeleportPlugin;
 import xyz.czarru.randomteleports.helpers.ChatHelper;
 import xyz.czarru.randomteleports.helpers.CoordinateHelper;
 import java.util.ArrayList;
 
 public class PlayerInteractListener implements Listener {
 
-    private CoordinateHelper coordinateHelper = new CoordinateHelper();
+    public RandomTeleportPlugin plugin;
+    private CoordinateHelper coordinateHelper;
     private ChatHelper chatHelper = new ChatHelper();
+
+    public PlayerInteractListener(RandomTeleportPlugin plugin, CoordinateHelper coordinateHelper){
+        this.plugin = plugin;
+        this.coordinateHelper = coordinateHelper;
+    }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void interactButton(PlayerInteractEvent e){
         final Player p = e.getPlayer();
         final Action a = e.getAction();
-        final Button btn = (Button) e.getClickedBlock().getState().getData();
         final Block clickedBlock = e.getClickedBlock();
-        final Block relativeBlock = clickedBlock.getRelative(btn.getAttachedFace());
         if(e.isCancelled())return;
         if(clickedBlock==null)return;
+        Bukkit.broadcastMessage("0");
+        if(!clickedBlock.getState().getType().name().contains("BUTTON")) return;
+        Bukkit.broadcastMessage("01");
+        final Button btn = (Button) e.getClickedBlock().getState().getData();
+        final Block relativeBlock = clickedBlock.getRelative(btn.getAttachedFace());
         if(!a.equals(Action.RIGHT_CLICK_BLOCK))return;
-        final ConfigurationSection cfg = Bukkit.spigot().getConfig();
+        Bukkit.broadcastMessage("1");
+        final ConfigurationSection cfg = plugin.getConfig();
         if(!clickedBlock.getType().equals(Material.getMaterial(cfg.getString("config.blocks.button"))))return;
+        Bukkit.broadcastMessage("2");
         final Location randomLoc = coordinateHelper.getRandomLocation(p.getWorld());
-        if(relativeBlock.equals(Material.getMaterial(cfg.getString("config.blocks.solo")))){
+        Bukkit.broadcastMessage("02");
+        Bukkit.broadcastMessage("RETURN MATERIAL: "+Material.getMaterial(cfg.getString("config.blocks.solo")));
+        Bukkit.broadcastMessage("RETURN RELATIVE: "+relativeBlock.getType());
+        if(relativeBlock.getType().equals(Material.getMaterial(cfg.getString("config.blocks.solo")))){
+            Bukkit.broadcastMessage("3");
             p.teleport(randomLoc);
             p.sendMessage(chatHelper.color(cfg.getString("config.messages.teleport")));
-        }else if(relativeBlock.equals(Material.getMaterial(cfg.getString("config.blocks.group")))){
+        }else if(relativeBlock.getType().equals(Material.getMaterial(cfg.getString("config.blocks.group")))){
             ArrayList<Player> nearbyPlayersList = coordinateHelper.getNearbyPlayers(relativeBlock.getLocation(), p);
-            if(nearbyPlayersList.isEmpty()){
+            if(nearbyPlayersList.isEmpty()) {
                 p.sendMessage(chatHelper.color(cfg.getString("config.messages.emptyList")));
-                Player opponent = nearbyPlayersList
-                        .stream()
-                        .findFirst()
-                        .get();
-                opponent.teleport(randomLoc);
-                p.teleport(randomLoc);
+                return;
             }
+            Player opponent = nearbyPlayersList
+                    .stream()
+                    .findFirst()
+                    .get();
+            opponent.teleport(randomLoc);
+            p.teleport(randomLoc);
         }
     }
 }
