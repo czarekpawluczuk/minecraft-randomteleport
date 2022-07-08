@@ -1,4 +1,5 @@
-main: xyz.czarru.randomteleports.Main
-author: czarru
+main: xyz.czarru.randomteleports.RandomTeleportPlugin
+author: Cezary Pawluczuk
 version: 1.0
-name:
+name: RandomTeleportsPlugin
+website: https://github.com/czarru

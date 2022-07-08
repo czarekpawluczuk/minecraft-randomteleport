@@ -5,11 +5,10 @@ import xyz.czarru.randomteleports.listeners.PlayerInteractListener;
 
 import java.util.Random;
 
-public class Main extends JavaPlugin {
-
-    public static Random r = new Random();
+public class RandomTeleportPlugin extends JavaPlugin {
 
     public void onEnable(){
+        saveDefaultConfig();
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
     }
 }
