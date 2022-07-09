@@ -50,6 +50,7 @@ public class PlayerInteractListener implements Listener {
             if(p.getLocation().getBlock().getType().equals(Material.getMaterial(plugin.getConfig().getString("config.blocks.plate")))) {
                 if (nearbyPlayersList.isEmpty()) {
                     p.sendMessage(chatHelper.color(cfg.getString("config.messages.emptyList")));
+                    return;
                 }
                 Player opponent = nearbyPlayersList
                         .stream()
